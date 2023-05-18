@@ -7,14 +7,12 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ProductsListPage {
-    private WebDriver driver;
-
+public class ProductsListPage extends AbstractPage{
     @FindBy(css = ".s-result-item")
     private List<WebElement> products;
 
     public ProductsListPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 
