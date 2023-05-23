@@ -10,7 +10,7 @@ target/
 .idea/
 pom.xml
 screenshots/
-
+reports/
 
 
 ### Eclipse ###

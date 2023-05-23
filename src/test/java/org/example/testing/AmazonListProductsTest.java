@@ -1,20 +1,25 @@
 package org.example.testing;
 
+import com.qaprosoft.carina.core.foundation.IAbstractTest;
+import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
+import com.zebrunner.carina.core.registrar.tag.Priority;
+import com.zebrunner.carina.core.registrar.tag.TestPriority;
 import org.example.testing.gui.page.*;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class AmazonListProductsTest extends AbstractTest {
+public class AmazonListProductsTest implements IAbstractTest {
 
 
     @Test
+    @MethodOwner(owner = "kzukowski")
+    @TestPriority(Priority.P4)
     void testSearchForProduct() {
-        WebDriver driver = driverThreadLocal.get();
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
 
         Assert.assertFalse(productsListPage.isProductListEmpty());
@@ -23,9 +28,11 @@ public class AmazonListProductsTest extends AbstractTest {
     }
 
     @Test
+    @MethodOwner(owner = "kzukowski")
+    @TestPriority(Priority.P4)
     void testFilterByPrice() {
-        WebDriver driver = driverThreadLocal.get();
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
         productsListPage.filterByPriceDescending();
         ArrayList<Double> productPrices = productsListPage.getProductPrices();
@@ -34,22 +41,26 @@ public class AmazonListProductsTest extends AbstractTest {
     }
 
     @Test
+    @MethodOwner(owner = "kzukowski")
+    @TestPriority(Priority.P4)
     void testShoppingCart() {
-        WebDriver driver = driverThreadLocal.get();
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
         String productTitle = productsListPage.getProductTitle(0);
-
         String productLink = productsListPage.getProductLink(0);
         ProductPage productPage = productsListPage.openProductByLink(productLink);
         CartPopup cartPopup = productPage.addToCart();
         CartPage cartPage = cartPopup.clickOnGoToCartButton();
-        Assert.assertTrue(cartPage.getItemsTitles().contains(productTitle));
+        Assert.assertTrue(productTitle.contains(cartPage.getItemsTitles().get(0)));
     }
+
     @Test
+    @MethodOwner(owner = "kzukowski")
+    @TestPriority(Priority.P4)
     void testShoppingCart2() {
-        WebDriver driver = driverThreadLocal.get();
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
         String productTitle = productsListPage.getProductTitle(0);
 
@@ -59,7 +70,7 @@ public class AmazonListProductsTest extends AbstractTest {
         CartPage cartPage = cartPopup.clickOnGoToCartButton();
         Assert.assertTrue(cartPage.getItemsTitles().contains(productTitle));
         Assert.assertEquals(cartPage.getItemsQuantities().get(0), "1");
-        driver.get(productLink);
+        getDriver().get(productLink);
         productPage.selectQuantity(3);
         CartPopup cartPopup2 = productPage.addToCart();
         CartPage cartPage2 = cartPopup2.clickOnGoToCartButton();
@@ -67,18 +78,23 @@ public class AmazonListProductsTest extends AbstractTest {
     }
 
     @Test
+    @MethodOwner(owner = "kzukowski")
+    @TestPriority(Priority.P4)
     void testComparisonBoxNrOfProducts() {
-        WebDriver driver = driverThreadLocal.get();
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
         String productLink = productsListPage.getProductLink(0);
         ProductPage productPage = productsListPage.openProductByLink(productLink);
         Assert.assertTrue(productPage.getNrComparisonProducts() >= 2);
     }
+
     @Test
-    void testTitleCohesion() {
-        WebDriver driver = driverThreadLocal.get();
-        HomePage homePage = new HomePage(driver);
+    @MethodOwner(owner = "kzukowski")
+    @TestPriority(Priority.P4)
+    void testTitleCoherence() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
         String productLink = productsListPage.getProductLink(0);
         String productTitle2 = productsListPage.getProductTitle(1);

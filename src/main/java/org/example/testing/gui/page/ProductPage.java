@@ -1,5 +1,7 @@
 package org.example.testing.gui.page;
 
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,35 +12,34 @@ import java.util.List;
 public class ProductPage extends AbstractPage {
 
     @FindBy(xpath = "//input[@id='add-to-cart-button']")
-    private WebElement addToCartButton;
-
-    private WebElement carouselGotoStart;
+    private ExtendedWebElement addToCartButton;
 
     @FindBy(className = "comparison_table_image_row")
-    private WebElement comparisonFirstRow;
+    private ExtendedWebElement comparisonFirstRow;
 
     @FindBy(id = "productTitle")
-    private WebElement titleElement;
+    private ExtendedWebElement titleElement;
 
     private String title;
 
-    private List<WebElement> comparisonFirstRowList;
+    private List<ExtendedWebElement> comparisonFirstRowList;
 
     private int maxQuantity;
 
     public ProductPage(WebDriver driver) {
         super(driver);
         title = titleElement.getText().trim();
+        setUiLoadedMarker(comparisonFirstRow);
     }
 
     public ProductsListPage goToProductsListPage() {
-        driver.navigate().back();
-        return new ProductsListPage(driver);
+        getDriver().navigate().back();
+        return new ProductsListPage(getDriver());
     }
 
     public CartPopup addToCart() {
-        click(addToCartButton);
-        return new CartPopup(driver);
+        addToCartButton.click();
+        return new CartPopup(getDriver());
     }
 
     public String getTitle() {
@@ -58,6 +59,7 @@ public class ProductPage extends AbstractPage {
         }
         return count;
     }
+
     public void selectQuantity(int quantity) {
         maxQuantity = determineMaxQuantity();
         System.out.println(maxQuantity);
@@ -66,11 +68,11 @@ public class ProductPage extends AbstractPage {
         }
         WebElement quantityOption = driver.findElement
                 (By.cssSelector(String.format("#quantity option[value*='%d']", quantity)));
-        click(quantityOption);
+        quantityOption.click();
     }
 
     public int getNrComparisonProducts() {
-        this.comparisonFirstRowList = comparisonFirstRow.findElements(By.cssSelector("th[role='columnheader']"));
+        comparisonFirstRowList = comparisonFirstRow.findExtendedWebElements(By.cssSelector("th[role='columnheader']"));
         return this.comparisonFirstRowList.size();
     }
 
