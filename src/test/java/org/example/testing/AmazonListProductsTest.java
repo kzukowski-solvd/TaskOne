@@ -1,6 +1,7 @@
 package org.example.testing;
 
 import org.example.testing.gui.page.*;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,6 +13,7 @@ public class AmazonListProductsTest extends AbstractTest {
 
     @Test
     void testSearchForProduct() {
+        WebDriver driver = driverThreadLocal.get();
         HomePage homePage = new HomePage(driver);
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
 
@@ -22,6 +24,7 @@ public class AmazonListProductsTest extends AbstractTest {
 
     @Test
     void testFilterByPrice() {
+        WebDriver driver = driverThreadLocal.get();
         HomePage homePage = new HomePage(driver);
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
         productsListPage.filterByPriceDescending();
@@ -32,6 +35,7 @@ public class AmazonListProductsTest extends AbstractTest {
 
     @Test
     void testShoppingCart() {
+        WebDriver driver = driverThreadLocal.get();
         HomePage homePage = new HomePage(driver);
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
         String productTitle = productsListPage.getProductTitle(0);
@@ -44,6 +48,7 @@ public class AmazonListProductsTest extends AbstractTest {
     }
     @Test
     void testShoppingCart2() {
+        WebDriver driver = driverThreadLocal.get();
         HomePage homePage = new HomePage(driver);
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
         String productTitle = productsListPage.getProductTitle(0);
@@ -63,6 +68,7 @@ public class AmazonListProductsTest extends AbstractTest {
 
     @Test
     void testComparisonBoxNrOfProducts() {
+        WebDriver driver = driverThreadLocal.get();
         HomePage homePage = new HomePage(driver);
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
         String productLink = productsListPage.getProductLink(0);
@@ -70,7 +76,8 @@ public class AmazonListProductsTest extends AbstractTest {
         Assert.assertTrue(productPage.getNrComparisonProducts() >= 2);
     }
     @Test
-    void testVideoSection() {
+    void testTitleCohesion() {
+        WebDriver driver = driverThreadLocal.get();
         HomePage homePage = new HomePage(driver);
         ProductsListPage productsListPage = homePage.searchForProduct("keyboard");
         String productLink = productsListPage.getProductLink(0);

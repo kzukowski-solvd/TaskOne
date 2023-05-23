@@ -18,4 +18,9 @@ public class ConfigReader {
     public String getDriverDirectory() {
         return resourceBundle.getString("driverDirectory");
     }
+
+    public String getHubUrl() {
+        return resourceBundle.getString("hubUrl");
+    }
+
 }
