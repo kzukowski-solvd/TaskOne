@@ -8,6 +8,9 @@ target/
 *.iml
 *.ipr
 .idea/
+pom.xml
+screenshots/
+
 
 
 ### Eclipse ###
