@@ -14,8 +14,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>20</maven.compiler.source>
-    <maven.compiler.target>20</maven.compiler.target>
+    <maven.compiler.source>19</maven.compiler.source>
+    <maven.compiler.target>19</maven.compiler.target>
+    <carina-core_version>8.0.4</carina-core_version>
   </properties>
 
   <dependencies>
@@ -56,7 +57,13 @@
       <scope>test</scope>
     </dependency>
 
+    <dependency>
+      <groupId>com.qaprosoft</groupId>
+      <artifactId>carina-core</artifactId>
+      <version>${carina-core_version}</version>
+    </dependency>
   </dependencies>
+
 
 
   <build>
