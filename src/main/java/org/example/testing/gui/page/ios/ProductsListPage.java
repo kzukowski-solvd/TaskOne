@@ -1,4 +1,4 @@
-package org.example.testing.gui.page.android;
+package org.example.testing.gui.page.ios;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.utils.factory.DeviceType;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductsListPageBase.class)
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = ProductsListPageBase.class)
 public class ProductsListPage extends ProductsListPageBase {
 
     @FindBy(css = ".s-result-item")
@@ -59,7 +59,9 @@ public class ProductsListPage extends ProductsListPageBase {
     @Override
     public void filterByPriceDescending() {
         filtersButton.click();
+
         getDriver().findElement(By.xpath("//span[contains(text(),'Sort by')]")).click();
+
         sortDescendingButton.click();
         closeFiltersButton.click();
     }

@@ -1,4 +1,4 @@
-package org.example.testing.gui.page.android;
+package org.example.testing.gui.page.ios;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.utils.factory.DeviceType;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductPageBase.class)
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = ProductPageBase.class)
 public class ProductPage extends ProductPageBase{
 
     @FindBy(xpath = "//input[@id='add-to-cart-button']")
@@ -58,7 +58,9 @@ public class ProductPage extends ProductPageBase{
         String selector = String.format("//a[@id='mobileQuantityDropDown_%d']", quantity - 1);
         System.out.println(selector);
         WebElement quantityOption = driver.findElement(By.xpath(selector));
-        quantityOption.click();}
+        quantityOption.click();
+//        getDriver().findElement(By.xpath("//button[contains(@aria-label,'Close')]")).click();
+    }
 
     @Override
     public ProductsListPage goToProductsListPage() {

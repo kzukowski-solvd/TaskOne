@@ -1,4 +1,4 @@
-package org.example.testing.gui.page.android;
+package org.example.testing.gui.page.ios;
 
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.example.testing.gui.page.base.CartPageBase;
@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CartPageBase.class)
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CartPageBase.class)
 public class CartPage extends CartPageBase {
 
 
@@ -28,7 +28,6 @@ public class CartPage extends CartPageBase {
     }
 
     @Override
-
     public ArrayList<String> getItemsQuantities() {
         List<WebElement> quantities = driver.findElements(By.xpath("//a[@class='a-size-medium a-link-normal']"));
         ArrayList<String> quantitiesList = new ArrayList<>();

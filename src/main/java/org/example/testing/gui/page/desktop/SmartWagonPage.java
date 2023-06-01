@@ -14,7 +14,6 @@ public class SmartWagonPage extends SmartWagonPageBase {
     @FindBy(xpath = "//*[@id=\"attach-sidesheet-view-cart-button\"]/span/input")
     private ExtendedWebElement goToCartButton;
 
-
     public SmartWagonPage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(goToCartButton);

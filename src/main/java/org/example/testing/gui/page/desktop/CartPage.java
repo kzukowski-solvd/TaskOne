@@ -27,7 +27,6 @@ public class CartPage extends CartPageBase {
 
     public ArrayList<String> getItemsTitles() {
         List<WebElement> productTitles = getDriver().findElements(By.cssSelector(".sc-product-title"));
-
         ArrayList<String> titles = new ArrayList<>();
         for (WebElement title : productTitles) {
             titles.add(title.getText());

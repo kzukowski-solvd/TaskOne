@@ -1,28 +1,29 @@
-package org.example.testing.gui.page.desktop;
+package org.example.testing.gui.page.ios;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.example.testing.gui.page.base.HomePageBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-@DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = HomePageBase.class)
+@DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase {
-    @FindBy(css = "#twotabsearchtextbox")
+
+    @FindBy(id = "nav-search-keywords")
     private ExtendedWebElement searchField;
 
-    @FindBy(css = "#nav-search-submit-button")
+    @FindBy(xpath = "//*[@id=\"nav-search-form\"]/div[2]/div")
     private ExtendedWebElement searchButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(searchField);
-
+        setUiLoadedMarker(searchButton);
     }
 
     @Override
     public ProductsListPage searchForProduct(String product) {
         searchField.type(product);
         searchButton.click();
-        return new ProductsListPage(driver);
+        return new ProductsListPage(getDriver());
     }
+
 }
